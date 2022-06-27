@@ -6,7 +6,8 @@ import pyautogui
 
 
 def press_key(key):
-    """press a key (str). Note: Gran Turismo requires you hold a keypress_key for a small duration."""
+    """press a key (str). Note: Gran Turismo requires you hold a keypress for a
+    small duration to count as a button press."""
     
     duration = 0.2
     hold_key(key, duration)
@@ -58,9 +59,6 @@ def open_extra_menu():
     press_key("enter")
     time.sleep(3)
     press_key("escape")
-    press_key("escape")
-    press_key("escape")
-    time.sleep(4)
     print("Extra menu item has been opened.")
 
 
@@ -79,8 +77,8 @@ def open_ticket():
 def get_tickets():
 
     # start at Cafe
-    print("Entering Cafe.")
     press_key("enter")
+    print("Entering Cafe.")
     time.sleep(3)
     
     # navigate and select My Collection
@@ -106,13 +104,20 @@ def get_tickets():
     print("Opening extra menu no. 3.")
     open_extra_menu()
 
+    # navigate back to Cafe
+    press_key("escape")
+    press_key("escape")
+    time.sleep(4)
+
 
 def open_tickets():
     
-    # navigate back to map to open ticket
+    # navigate to Garage
     press_key("right")
     press_key("enter")
     time.sleep(4)
+
+    # navigate to Gifts
     press_key("right")
     press_key("right")
     press_key("right")
