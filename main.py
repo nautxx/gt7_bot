@@ -6,7 +6,7 @@ import pyautogui
 
 
 def press_key(key):
-    """press a key (str). Note: Gran Turismo requires you hold a keypress for a
+    """Presses a key (str). Note: Gran Turismo requires you hold a keypress for a
     small duration to count as a button press."""
     
     duration = 0.2
@@ -22,7 +22,7 @@ def hold_key(key, duration):
 
 
 def focus_window():
-    """Focus the window by clicking on the center of the primary screen."""
+    """Focuses on the window by clicking on the center of the primary screen."""
 
     x, y = pyautogui.size()
     center = x / 2, y / 2
@@ -34,7 +34,8 @@ def focus_window():
 
 
 def detect_on_screen(file_name):
-    """Returns True if inputted image is a screen element that has been detected. False otherwise."""
+    """Returns True if inputted image is a screen element that has been
+    detected. Returns False otherwise."""
 
     x, y = pyautogui.size()
     half_x = int(x / 2)
@@ -53,7 +54,7 @@ def detect_on_screen(file_name):
     return detected_screen is not None
 
 def open_extra_menu():
-    """Helper function to opens extra menu item."""
+    """Helper function to open the extra menu item."""
 
     press_key("enter")
     press_key("enter")
@@ -63,7 +64,7 @@ def open_extra_menu():
 
 
 def open_ticket():
-    """Helper function to open ticket."""
+    """Helper function to open a ticket."""
 
     # open ticket
     press_key("enter")
