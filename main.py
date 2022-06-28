@@ -24,6 +24,8 @@ def hold_key(key, duration):
 
 
 def delay(duration):
+    """Add delay for some duration(int/float)."""
+
     if args.debug:
         print(f"{duration} second delay.")
     time.sleep(duration)
