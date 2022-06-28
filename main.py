@@ -209,7 +209,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="gt7_bot by naut 2022"
     )
-    parser.add_argument("--version", "-v", action="version", version="%(prog)s v0.0.2")
+    parser.add_argument("--version", "-v", action="version", version="%(prog)s v1.0.0")
     parser.add_argument("--cycles", "-c", type=int, default=True, help="Indicate how many cyles to run. Default is set to infiniti.")
     parser.add_argument("--debug", "-db", action="store_true", help="Toggle debug mode.")
 
