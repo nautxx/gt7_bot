@@ -63,12 +63,12 @@ def detect_on_screen(file_name):
 
 
 def open_extra_menu_item():
-    """Helper function to open the extra menu item."""
+    """Helper function to open the extra menu."""
 
-    press_key("enter")
-    press_key("enter")
+    press_key("enter")  # open extra menu
+    press_key("enter")  # watch movie
     delay(3)
-    press_key("escape")
+    press_key("escape") # skip movie
     print("Extra menu item has been opened.")
 
 
@@ -81,7 +81,7 @@ def open_ticket():
     delay(16)
 
 
-def accept_ticket():
+def accept_gift():
     """Helper function to accept a ticket using screen detection, but default 
     to normal acceptance if it fails."""
 
@@ -89,7 +89,7 @@ def accept_ticket():
         print("Car screen detected.")
         press_key("enter")
         delay(10)
-        press_key("enter")
+        press_key("enter")  # speed up point tally
         delay(4)
         press_key("enter")
         press_key("enter")
@@ -116,7 +116,7 @@ def accept_ticket():
         press_key("enter")
 
     press_key("enter")  # accept the ticket
-    print("Gift accepted.")
+    print("Ticket gift received.")
 
 
 def get_tickets():
@@ -144,6 +144,7 @@ def get_tickets():
     open_extra_menu_item()
 
     # navigate to extra menu no. 3
+    press_key("right")
     press_key("right")
 
     # open extra menu no. 3
@@ -175,7 +176,7 @@ def open_tickets():
     open_ticket()
 
     # accept 4-Star ticket
-    accept_ticket()
+    accept_gift()
 
     # navigate to 6-Star rotary ticket
     press_key("right")
@@ -185,7 +186,7 @@ def open_tickets():
     open_ticket()
 
     # accept 6-Star ticket
-    accept_ticket()
+    accept_gift()
 
     # navigate back to map
     print("Heading back to map.")
