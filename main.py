@@ -18,7 +18,7 @@ def press_key(key):
 
 def hold_key(key, duration):
     """Holds a key (str) for some duration (int/float)."""
-    
+
     with pyautogui.hold(key):
         time.sleep(duration)
 
@@ -157,7 +157,7 @@ def get_tickets():
 
 
 def open_tickets():
-    """Opens all tickets."""
+    """Opens both roulette tickets."""
     
     # navigate to Garage
     press_key("right")
