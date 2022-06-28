@@ -1,11 +1,33 @@
 # gt7_bot
  A python bot for Gran Turismo 7 on the PS5.
 
-## Environment
+## Known Issues
+ Dockerfile unable to run properly. pyautogui needs to run headless first.
+
+## Build Environment using Terminal
 
 ```shell
 pip install -r requirements.txt
 ```
+
+## Run using Terminal
+
+```shell
+python3 main.py
+```
+
+## Build Environment using Docker (Currently not working.)
+
+```shell
+docker build -t nautxx/gt7_bot-example .
+```
+
+## Run using Docker (Currently not working.)
+
+```shell
+docker run nautxx/gt7_bot-example
+```
+
 
 IMPORTANT:
 
