@@ -15,3 +15,7 @@ def cursor_location():
 
     except KeyboardInterrupt:
         print('\n')
+
+
+cursor_location()
+
