@@ -31,6 +31,16 @@ def delay(duration):
     time.sleep(duration)
 
 
+def startup_delay():
+    """Add delay at startup to give user time to switch to ps remote app."""
+
+    print(
+        f"Using startup delay of {str(args.startup_delay)} " + 
+        "seconds. Switch to PS Remote Play window now."
+    )
+    delay(args.startup_delay)
+
+
 def focus_window():
     """Focuses on the window by clicking on the center of the primary screen."""
 
@@ -213,19 +223,24 @@ if __name__ == "__main__":
         prog="gt7_bot by naut 2022"
     )
     parser.add_argument("--version", "-v", action="version", version="%(prog)s v1.0.0")
-    parser.add_argument("--cycles", "-c", type=int, default=True, help="Indicate how many cyles to run. Default is set to infiniti.")
-    parser.add_argument("--debug", "-db", action="store_true", help="Toggle debug mode.")
+    parser.add_argument("--cycles", "-c", type=int, default=True, help="indicate how many cyles to run. Default is set to infiniti.")
+    parser.add_argument("--startup_delay", "-sd" type=int, default=5, help="startup delay in seconds.")
+    parser.add_argument("--debug", "-db", action="store_true", help="toggle debug mode.")
 
     args = parser.parse_args()
     
     cycles = 0
     time_initial = time.time()
+    startup_delay()
     while args.cycles:
         execute_bot()
         cycles += 1
         time_elapsed_s = time.time() - time_initial
         time_elapsed_m = time_elapsed_s / 60
-        print(f"{str(cycles)} cycle{'s'[:cycles^1]} completed over {time_elapsed_m} min.")
+        print(
+            f"{str(cycles)} cycle{'s'[:cycles^1]} " + 
+            f"completed over {time_elapsed_m} min."
+        )
 
         if args.cycles == cycles:
             args.cycles = False
