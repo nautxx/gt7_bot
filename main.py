@@ -23,6 +23,32 @@ def hold_key(key, duration):
         time.sleep(duration)
 
 
+def press_ps_button():
+
+    duration = 0.2
+    pyautogui.moveTo(450, 524, duration = 0.2)
+    pyautogui.mouseDown()
+    time.sleep(duration)
+    pyautogui.mouseUp()
+    if args.debug:
+        print("PS Button pressed.")
+
+
+def restart_game():
+
+    press_ps_button()
+    delay(2)
+    press_key("down")
+    press_key("enter")
+    press_key("enter")
+    press_key("down")
+    press_key("down")
+    press_key("enter")  # close game
+    delay(4)
+    press_key("enter")  # reopen game
+    delay(22)
+
+
 def delay(duration):
     """Add delay for some duration(int/float)."""
 
@@ -31,23 +57,13 @@ def delay(duration):
     time.sleep(duration)
 
 
-def startup_delay():
-    """Add delay at startup to give user time to switch to ps remote app."""
-
-    print(
-        f"Using startup delay of {str(args.startup_delay)} " + 
-        "seconds. Switch to PS Remote Play window now."
-    )
-    delay(args.startup_delay)
-
-
 def focus_window():
     """Focuses on the window by clicking on the center of the primary screen."""
 
     x, y = pyautogui.size()
-    center = x / 2, y / 2
+    # center = x / 2, y / 2
     delay = 1
-    pyautogui.moveTo(center)
+    pyautogui.moveTo(450, 15)
     time.sleep(delay)
     pyautogui.click()
     time.sleep(delay)
@@ -81,7 +97,6 @@ def open_extra_menu_item():
     press_key("enter")  # watch movie
     delay(3)
     press_key("escape") # skip movie
-    print("Extra menu item has been opened.")
 
 
 def open_ticket():
@@ -93,49 +108,28 @@ def open_ticket():
     delay(16)
 
 
-def accept_gift():
+def accept_gift(option=4):
     """Helper function to accept a ticket using screen detection, but default 
     to normal acceptance if it fails."""
 
-    if detect_on_screen("car_text.png"):
-        print("Car screen detected.")
+    if option == 4:
         press_key("enter")
         delay(10)
-        press_key("enter")  # speed up point tally
+        press_key("enter")  # speeds up point tally
         delay(4)
         press_key("enter")
         press_key("enter")
     
-    elif detect_on_screen("credits_text.png"):
-        print("Credits screen detected.")
-        press_key("enter")
-        delay(5)
-        press_key("enter")
-    
-    elif detect_on_screen("tuning_text.png"):
-        print("Tuning part screen detected.")
-    
-    elif detect_on_screen("invitation_text.png"):
-        print("Invitation screen detected.")
-    
-    else:
-        # use default ticket acceptance otherwise.
-        press_key("enter")
-        delay(10)
-        press_key("enter")
-        delay(4)
-        press_key("enter")
-        press_key("enter")
-
     press_key("enter")  # accept the ticket
-    print("Ticket gift received.")
 
 
 def get_tickets():
     """Gets all of the free tickets and goes back to home."""
+    
+    # enter world map
+    press_key("enter")
 
-    # start at home (Cafe)
-    print("Entering Cafe.")
+    # enter cafe
     press_key("enter")
     delay(3)
     
@@ -152,7 +146,6 @@ def get_tickets():
     press_key("up")
 
     # open extra menu no. 1
-    print("Opening extra menu no. 1.")
     open_extra_menu_item()
 
     # navigate to extra menu no. 3
@@ -160,7 +153,6 @@ def get_tickets():
     press_key("right")
 
     # open extra menu no. 3
-    print("Opening extra menu no. 3.")
     open_extra_menu_item()
 
     # navigate back to home (Cafe)
@@ -188,7 +180,7 @@ def open_tickets():
     open_ticket()
 
     # accept 4-Star ticket
-    accept_gift()
+    accept_gift(4)
 
     # navigate to 6-Star rotary ticket
     press_key("right")
@@ -198,24 +190,19 @@ def open_tickets():
     open_ticket()
 
     # accept 6-Star ticket
-    accept_gift()
-
-    # navigate back to map
-    print("Heading back to map.")
-    press_key("escape")
-    press_key("escape")
-    delay(3)
-
-    # place cursor on Menu to start over
-    press_key("left")
+    accept_gift(6)
 
 
 def execute_bot():
     """Main bot script."""
 
     focus_window()
+    print("Getting tickets...")
     get_tickets()
+    print("Opening tickets...")
     open_tickets()
+    print("Restarting game...")
+    restart_game()
 
 
 if __name__ == "__main__":
@@ -224,14 +211,16 @@ if __name__ == "__main__":
     )
     parser.add_argument("--version", "-v", action="version", version="%(prog)s v1.0.0")
     parser.add_argument("--cycles", "-c", type=int, default=True, help="indicate how many cyles to run. Default is set to infiniti.")
-    parser.add_argument("--startup_delay", "-sd" type=int, default=5, help="startup delay in seconds.")
+    parser.add_argument("--startup_delay", "-sd", type=int, default=5, help="startup delay in seconds.")
     parser.add_argument("--debug", "-db", action="store_true", help="toggle debug mode.")
 
     args = parser.parse_args()
     
     cycles = 0
+    time_elapsed_m = 0
+    total_completion_time = args.cycles * 2
+    print(f"Estimated time to completion: {total_completion_time} minutes.")
     time_initial = time.time()
-    startup_delay()
     while args.cycles:
         execute_bot()
         cycles += 1
@@ -241,7 +230,11 @@ if __name__ == "__main__":
             f"{str(cycles)} cycle{'s'[:cycles^1]} " + 
             f"completed over {time_elapsed_m} min."
         )
+        print(
+            "Estimated time to completion: " + 
+            f"{total_completion_time - time_elapsed_m} min."
+        )
 
         if args.cycles == cycles:
             args.cycles = False
-            print(f"Bot operations complete.")
+            print("Bot operations complete.")
