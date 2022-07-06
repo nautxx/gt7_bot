@@ -24,6 +24,8 @@ def hold_key(key, duration):
 
 
 def press_ps_button():
+    """Press ps button. Note: Gran Turismo requires you hold a keypress for a
+    small duration to count as a button press."""
 
     duration = 0.2
     pyautogui.moveTo(450, 524, duration = 0.2)
@@ -35,6 +37,7 @@ def press_ps_button():
 
 
 def restart_game():
+    """Presses ps button and restarts game."""
 
     press_ps_button()
     delay(2)
@@ -192,6 +195,10 @@ def open_tickets():
     # accept 6-Star ticket
     accept_gift(6)
 
+    # escape to world map
+    press_key("escape")
+    press_key("escape")
+
 
 def execute_bot():
     """Main bot script."""
@@ -212,6 +219,7 @@ if __name__ == "__main__":
     parser.add_argument("--version", "-v", action="version", version="%(prog)s v1.0.0")
     parser.add_argument("--cycles", "-c", type=int, default=True, help="indicate how many cyles to run. Default is set to infiniti.")
     parser.add_argument("--startup_delay", "-sd", type=int, default=5, help="startup delay in seconds.")
+    parser.add_argument("--ps_button", "-ps", help="ps button coordinates.")
     parser.add_argument("--debug", "-db", action="store_true", help="toggle debug mode.")
 
     args = parser.parse_args()
