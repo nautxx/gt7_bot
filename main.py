@@ -45,9 +45,9 @@ def delay(duration):
 
 
 def restart_game():
-    """Presses ps button and restarts game."""
+    """Presses ps button, navigates through menu to restart game."""
 
-    press_ps_button()
+    press_ps_button()   # open ps menu
     delay(2)
     press_key("down")
     press_key("enter")
