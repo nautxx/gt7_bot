@@ -72,27 +72,6 @@ def focus_window():
     time.sleep(delay)
 
 
-def detect_on_screen(file_name):
-    """Returns True if inputted image is a screen element that has been
-    detected. Returns False otherwise."""
-
-    x, y = pyautogui.size()
-    half_x = int(x / 2)
-    half_y = int(y / 2)
-
-    confidence = 0.5
-    grayscale = True
-    region = (half_x, 0, half_x, half_y) # left, top, width, height
-
-    path = f"images/{file_name}"
-    print("Analyzing " + file_name + " screen.")
-    detected_screen = pyautogui.locateOnScreen(
-        path, region=region, grayscale=grayscale, confidence=confidence
-    )
-    
-    return detected_screen is not None
-
-
 def open_extra_menu_item():
     """Helper function to open the extra menu."""
 
