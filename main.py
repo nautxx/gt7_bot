@@ -28,7 +28,7 @@ def press_ps_button():
     small duration to count as a button press."""
 
     duration = 0.2
-    pyautogui.moveTo(450, 524, duration = 0.2)
+    pyautogui.moveTo(args.ps_button, duration = 0.2)
     pyautogui.mouseDown()
     time.sleep(duration)
     pyautogui.mouseUp()
@@ -66,7 +66,7 @@ def focus_window():
     x, y = pyautogui.size()
     # center = x / 2, y / 2
     delay = 1
-    pyautogui.moveTo(450, 15)
+    pyautogui.moveTo(args.focus)
     time.sleep(delay)
     pyautogui.click()
     time.sleep(delay)
@@ -198,7 +198,8 @@ if __name__ == "__main__":
     parser.add_argument("--version", "-v", action="version", version="%(prog)s v1.0.0")
     parser.add_argument("--cycles", "-c", type=int, default=True, help="indicate how many cyles to run. Default is set to infiniti.")
     parser.add_argument("--startup_delay", "-sd", type=int, default=5, help="startup delay in seconds.")
-    parser.add_argument("--ps_button", "-ps", help="ps button coordinates.")
+    parser.add_argument("--focus", "-f", help="focus window coordinate.", nargs=2, default=(450, 15))
+    parser.add_argument("--ps_button", "-ps", help="ps button coordinate.", nargs=2, default=(450, 524))
     parser.add_argument("--debug", "-db", action="store_true", help="toggle debug mode.")
 
     args = parser.parse_args()
