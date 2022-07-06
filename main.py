@@ -61,7 +61,7 @@ def delay(duration):
 
 
 def focus_window():
-    """Focuses on the window by clicking on the center of the primary screen."""
+    """Focuses on the window by clicking on the top left of the primary screen."""
 
     x, y = pyautogui.size()
     # center = x / 2, y / 2
