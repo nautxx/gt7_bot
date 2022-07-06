@@ -36,6 +36,14 @@ def press_ps_button():
         print("PS Button pressed.")
 
 
+def delay(duration):
+    """Add delay for some duration(int/float)."""
+
+    if args.debug:
+        print(f"{duration} second delay.")
+    time.sleep(duration)
+
+
 def restart_game():
     """Presses ps button and restarts game."""
 
@@ -50,14 +58,6 @@ def restart_game():
     delay(4)
     press_key("enter")  # reopen game
     delay(22)
-
-
-def delay(duration):
-    """Add delay for some duration(int/float)."""
-
-    if args.debug:
-        print(f"{duration} second delay.")
-    time.sleep(duration)
 
 
 def focus_window():
@@ -106,7 +106,7 @@ def accept_gift(option=4):
 
 
 def get_tickets():
-    """Gets all of the free tickets and goes back to home."""
+    """Navigates through home screen, opens extra menu items and returns back to home."""
     
     # enter world map
     press_key("enter")
@@ -144,7 +144,7 @@ def get_tickets():
 
 
 def open_tickets():
-    """Opens both roulette tickets."""
+    """Navigates from Cafe to Garage to open gifts. Opens both roulette tickets."""
     
     # navigate to Garage
     press_key("right")
